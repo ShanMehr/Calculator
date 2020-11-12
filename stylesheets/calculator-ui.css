@@ -8,7 +8,6 @@ body
 
 #main-container
 {
-
     width:100%;
     height:100%;
     display: flex;
@@ -19,7 +18,6 @@ body
 
 #calculator
 {
-   
     background-color:  #333333;
     width:600px;
     height: 600px;
@@ -54,22 +52,72 @@ body
 
 #input-container
 {
-    padding-top:50px;
+    display:flex;
+    justify-content: center;
+  
+    padding-top:25px;
     height:70%;
     width: 100%;
-    background-color:red;
-    
+       
 }
 
 #output-control-container
 {
-    width:40%;
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    
+    width:100%;
     height: 10%;
+    
 }
 
 #operators-container
+{  
+    margin-left:10px;
+    padding:25px;
+    display: grid;
+
+    grid-template-areas:
+   
+    "content content content";
+    background-color:grey;
+    width:70%;
+    height:40%;
+}
+
+#keys-container
 {
-    width:50%;
-    height:50%;
-    background-color: yellowgreen;
+    padding:25px;
+    display: grid;
+    grid-template-areas:
+   
+    "content content content";
+    background-color:grey;
+    width:70%;
+    height:40%;
+    
+}
+.operand
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height:30px;
+    background-color:orange;
+    
+
+}
+
+.operator
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:70px;
+    height:30px;
+    background-color:orange;
+    
+
 }
