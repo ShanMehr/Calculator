@@ -1,3 +1,3 @@
 # Calculator
-Implemented a calculator in the web browser using Javascript,html and css
+Implemented a calculator in the web browser with javascript, html and css
 
