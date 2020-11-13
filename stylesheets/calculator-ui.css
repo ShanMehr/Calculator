@@ -1,8 +1,9 @@
 body
 {
-    background-color:#5e2750;
+    background:linear-gradient(180deg, #805875, #5e2750,#411934);
     
     color:white;
+    font-weight: bold;
 }
 
 
@@ -19,9 +20,9 @@ body
 #calculator
 {
     background-color:  #333333;
-    width:600px;
-    height: 600px;
-    border-radius: 10px;
+    width:500px;
+    height: 500px;
+    border-radius: 5px;
     box-shadow: 3px 5px 5px black;
  
 }
@@ -54,10 +55,10 @@ body
 {
     display:flex;
     justify-content: center;
-  
     padding-top:25px;
-    height:70%;
+    height:60%;
     width: 100%;
+    background-color:#cc0000 ;
        
 }
 
@@ -68,56 +69,67 @@ body
     align-items: center;
     
     width:100%;
-    height: 10%;
+    height:10%;
     
 }
 
 #operators-container
 {  
     margin-left:10px;
+    margin-right:10px;
     padding:25px;
     display: grid;
-
     grid-template-areas:
-   
-    "content content content";
-    background-color:grey;
-    width:70%;
-    height:40%;
+    "content content";
+    background-color:#B6AFA8;
+    width:30%;
+    height:80%;
+    border-radius:5px;
 }
 
 #keys-container
 {
+    
+    margin-left:10px;
+    margin-right:10px;
     padding:25px;
+    padding-top:30px;
     display: grid;
     grid-template-areas:
-   
     "content content content";
-    background-color:grey;
-    width:70%;
-    height:40%;
+    padding-right:0px;
+    background-color: #411934;
+    width:60%;
+    height:80%;
+    border-radius:5px;
     
 }
+.operator
+{
+    width:60px;
+    height:40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:#333333;
+    border-radius:5px;
+    box-shadow: 1px 0px 3px black;
+    
+
+}
+
 .operand
 {
     display: flex;
     justify-content: center;
     align-items: center;
-    width:70px;
-    height:30px;
-    background-color:orange;
+    width:60px;
+    height:40px;
+    background-color:#333333;
+    border-radius:5px;
+    box-shadow: 1px 0px 3px black;
     
 
 }
 
-.operator
-{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:70px;
-    height:30px;
-    background-color:orange;
-    
 
-}
