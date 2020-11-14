@@ -57,7 +57,6 @@ function addEventListenersToButtons()
 {
     // Get the containers that has the operators
     let extraOperatorContainer=document.getElementById("output-control-keys-container").children;
-    console.log(extraOperatorContainer);
     let operatorContainer = document.getElementById("operators-container").children;
 
     // Get the container that has the operands
@@ -98,6 +97,7 @@ function addEventListenersToOperands(operandContainer)
 
 function handleOperatorInput(event)
 {
+    console.log("handleOperatorInput")
     console.log("Operator clicked");
     console.log(event);
     console.log(event.path[0].innerHTML);
@@ -105,36 +105,40 @@ function handleOperatorInput(event)
     {
         input.operator=event.path[0].innerHTML;
         calculatorDisplay.innerHTML="";
-        clearScreen();
+        
     }
-    else
+    else if(operatorIsChosen())
     {
-        //let calculation= performOperation();
-        //calculatorDisplay.innerHTML=calculation;
+        input.operand1 = performOperation(input.operator);
+        input.operand2="";
+        input.operator=event.path[0].innerHTML;
+        calculatorDisplay.innerHTML=input.operand1;
+        
+        
     }
-    
-    
 }
+    
+
 
 function handleOperandInput(event)
 {   
     console.log(event.path[0].innerHTML);  
 
-    if(operatorIsChosen()&&firstOperandIsChosen())
+    if(operatorIsChosen())
     {
         // Performs Action when an operator has been chosen 
         // And when another number has been chosen
 
+        // When a number has been entered after an operator
+        
         input.operand2+=event.path[0].innerHTML;
         calculatorDisplay.innerHTML=input.operand2;
-        input.operator="";
         console.log(input.operand2);
            
     }
     else if(!operatorIsChosen())
     {
         // Performs when the first number is chosen
-
        input.operand1+=event.path[0].innerHTML;
        calculatorDisplay.innerHTML=input.operand1;
        console.log(input.operand1);
@@ -169,6 +173,37 @@ function operatorIsChosen()
 function performOperation(operator)
 {
     
+    if(operator==="+")
+    {
+        input.operand1= add(input.operand1,input.operand2);
+    }
+    else if(operator==="-")
+    {
+        input.operand1= subtract(input.operand1,input.operand2);
+    }
+    else if(operator==="/")
+    {
+        input.operand1= divide(input.operand1,input.operand2);
+    } 
+    else if(operator==="x")
+    {
+        input.operand1= multiply(input.operand1,input.operand2);
+    }
+    else if(operator=="AC")
+    {
+        clearScreen();
+    }
+    else if(operator="xʸ")
+    {
+        input.operand1 = power(input.operand1,input.operand2);
+    } 
+    
+
+    
+ 
+    
+    
+
 }
 
 addEventListenersToButtons()
