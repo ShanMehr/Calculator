@@ -1,43 +1,88 @@
-
-function handleOperatorInput(event)
+const input =
 {
-    console.log(event);
+    operand1:"",
+    operand2:"",
+    operator:"",
+};
+
+const calculatorDisplay=  document.getElementById("calc-result");
+
+
+
+function add(operand1,operand2)
+{
+    return operand1+operand2;
 }
 
-function handleOperandInput(event)
+function subtract(operand1,operand2)
 {
-    console.log(event);
+    return operand1-operand2;
 }
+
+function multiply(operand1,operand2)
+{
+    return operand1*operand2;
+}
+
+function divide(operand1,operand2)
+{
+    if(operand2!=0)
+    {
+        return operand1/operand2;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+function percentage(operand1)
+{
+    return operand1*0.01;
+}
+
+function power(operand1,operand2)
+{
+    return Math.pow(operand1,operand2);
+}
+
+function sqrt(operand1)
+{
+    return Math.sqrt(operand1);
+}
+
+
 
 function addEventListenersToButtons()
 {
-    console.log("Adding Event Listeners");
+    // Get the containers that has the operators
     let extraOperatorContainer=document.getElementById("output-control-keys-container").children;
     console.log(extraOperatorContainer);
-    let operatorContainer = document.getElementById("keys-container").children;
-    let operandContainer = document.getElementById("operators-container").children;
+    let operatorContainer = document.getElementById("operators-container").children;
 
-    addEventListenersToOperators(extraOperatorContainer,operandContainer);
+    // Get the container that has the operands
+    let operandContainer = document.getElementById("keys-container").children;
+
+    // Add Event click Listeners to the child nodes
+
+    // First add Event Listeners to the operators
+    addEventListenersToOperators(operatorContainer,extraOperatorContainer);
+
+    // Then add event listeners to the operands
     addEventListenersToOperands(operandContainer);
-    
 }
 
-function addEventListenersToOperators(operatorCollection,otherOperatorCollection)
+function addEventListenersToOperators(operatorContainer,extraOperatorContainer)
 {
-    console.log("Adding Event Listeners To Operators");
     // Adds Event Listeners to Operators
-    for(let index=0;index<operatorCollection.length;index++)
+    for(let index=0;index<operatorContainer.length;index++)
     {
-        operatorCollection[index].addEventListener('click', handleOperatorInput);
-        console.log("Operator Added");
-        console.log(operatorCollection[index]);
-        
+        operatorContainer[index].addEventListener('click', handleOperatorInput);
+     
     }
-    for(let index=0;index<otherOperatorCollection.length;index++)
+    for(let index=0;index<extraOperatorContainer.length;index++)
     {
-        otherOperatorCollection[index].addEventListener('click', handleOperatorInput);
-        console.log("Operator Added");
-        console.log(otherOperatorCollection[index]);
+        extraOperatorContainer[index].addEventListener('click', handleOperatorInput);
     }
 }
 
@@ -47,12 +92,79 @@ function addEventListenersToOperands(operandContainer)
     // Adds Event Listeners to Operators
     for(let index=0;index<operandContainer.length;index++)
     {
-        console.log("Operand Added");
         operandContainer[index].addEventListener('click', handleOperandInput);
-        console.log("Operand Added");
-        console.log(operandContainer[index]);
     }
+}
+
+function handleOperatorInput(event)
+{
+    console.log("Operator clicked");
+    console.log(event);
+    console.log(event.path[0].innerHTML);
+    if(!operatorIsChosen())
+    {
+        input.operator=event.path[0].innerHTML;
+        calculatorDisplay.innerHTML="";
+        //clearScreen();
+    }
+    else
+    {
+        //let calculation= performOperation();
+        //calculatorDisplay.innerHTML=calculation;
+    }
+    
     
 }
 
-addEventListenersToButtons();
+function handleOperandInput(event)
+{   
+    console.log(event.path[0].innerHTML);  
+
+    if(operatorIsChosen()&&firstOperandIsChosen())
+    {
+        // Performs Action when an operator has been chosen 
+        // And when another number has been chosen
+
+        input.operand2+=event.path[0].innerHTML;
+        calculatorDisplay.innerHTML=input.operand2;
+        input.operator="";
+        console.log(input.operand2);
+           
+    }
+    else if(!operatorIsChosen())
+    {
+        // Performs when the first number is chosen
+
+       input.operand1+=event.path[0].innerHTML;
+       calculatorDisplay.innerHTML=input.operand1;
+       console.log(input.operand1);
+    }
+  
+}
+
+function clearScreen()
+{
+    calculatorDisplay.innerHTML="";
+}
+
+function firstOperandIsChosen()
+{    
+    return (input.operand1!="");
+}
+
+function secondOperandIsChosen()
+{    
+    return (input.operand1!="");
+}
+
+function operatorIsChosen()
+{
+    return (input.operator!="");
+}
+
+function performOperation(operator)
+{
+    
+}
+
+addEventListenersToButtons()
