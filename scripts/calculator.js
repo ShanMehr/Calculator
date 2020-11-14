@@ -105,7 +105,7 @@ function handleOperatorInput(event)
     {
         input.operator=event.path[0].innerHTML;
         calculatorDisplay.innerHTML="";
-        //clearScreen();
+        clearScreen();
     }
     else
     {
@@ -144,7 +144,11 @@ function handleOperandInput(event)
 
 function clearScreen()
 {
+    // Clears the display
     calculatorDisplay.innerHTML="";
+    input.operand2="";
+    input.operand1="";
+    input.operator="";
 }
 
 function firstOperandIsChosen()
