@@ -109,10 +109,10 @@ function handleOperatorInput(event)
     }
     else if(operatorIsChosen())
     {
-        input.operand1 = performOperation(input.operator);
-        input.operand2="";
-        input.operator=event.path[0].innerHTML;
+        performOperation(input.operator);
+        
         calculatorDisplay.innerHTML=input.operand1;
+        input.operand2="";
         
         
     }
@@ -172,22 +172,25 @@ function operatorIsChosen()
 
 function performOperation(operator)
 {
-    
+    let operand1=parseInt(input.operand1);
+    console.log(operand1);
+    let operand2= parseInt(input.operand2);
+    console.log(operand2);
     if(operator==="+")
     {
-        input.operand1= add(input.operand1,input.operand2);
+        input.operand1= add(operand1,operand2);
     }
     else if(operator==="-")
     {
-        input.operand1= subtract(input.operand1,input.operand2);
+        input.operand1= subtract(operand1,operand2);
     }
     else if(operator==="/")
     {
-        input.operand1= divide(input.operand1,input.operand2);
+        input.operand1= divide(operand1,operand2);
     } 
     else if(operator==="x")
     {
-        input.operand1= multiply(input.operand1,input.operand2);
+        input.operand1= multiply(operand1,operand2);input.operand2="";
     }
     else if(operator=="AC")
     {
@@ -195,7 +198,7 @@ function performOperation(operator)
     }
     else if(operator="xʸ")
     {
-        input.operand1 = power(input.operand1,input.operand2);
+        input.operand1 = power(operand1,operand2);
     } 
     
 
