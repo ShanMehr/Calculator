@@ -1,5 +1,6 @@
 const input =
 {
+    // Holds the operands and operators
     operand1:"",
     operand2:"",
     operator:"",
@@ -11,23 +12,28 @@ const calculatorDisplay=  document.getElementById("calc-result");
 
 function add(operand1,operand2)
 {
+    // Addition
     return operand1+operand2;
 }
 
 function subtract(operand1,operand2)
 {
+    // Subtraction
     return operand1-operand2;
 }
 
 function multiply(operand1,operand2)
 {
+    // Multiplication
     return operand1*operand2;
 }
 
 function divide(operand1,operand2)
 {
+    // Division
     if(operand2!=0)
     {
+        // Can's divide by zero
         return operand1/operand2;
     }
     else
@@ -36,27 +42,12 @@ function divide(operand1,operand2)
     }
 }
 
-function percentage(operand1)
-{
-    return operand1*0.01;
-}
-
-function power(operand1,operand2)
-{
-    return Math.pow(operand1,operand2);
-}
-
-function sqrt(operand1)
-{
-    return Math.sqrt(operand1);
-}
-
 
 
 function addEventListenersToButtons()
 {
     // Get the containers that has the operators
-    let extraOperatorContainer=document.getElementById("output-control-keys-container").children;
+    
     let operatorContainer = document.getElementById("operators-container").children;
 
     // Get the container that has the operands
@@ -65,13 +56,13 @@ function addEventListenersToButtons()
     // Add Event click Listeners to the child nodes
 
     // First add Event Listeners to the operators
-    addEventListenersToOperators(operatorContainer,extraOperatorContainer);
+    addEventListenersToOperators(operatorContainer);
 
     // Then add event listeners to the operands
     addEventListenersToOperands(operandContainer);
 }
 
-function addEventListenersToOperators(operatorContainer,extraOperatorContainer)
+function addEventListenersToOperators(operatorContainer)
 {
     // Adds Event Listeners to Operators
     for(let index=0;index<operatorContainer.length;index++)
@@ -79,10 +70,7 @@ function addEventListenersToOperators(operatorContainer,extraOperatorContainer)
         operatorContainer[index].addEventListener('click', handleOperatorInput);
      
     }
-    for(let index=0;index<extraOperatorContainer.length;index++)
-    {
-        extraOperatorContainer[index].addEventListener('click', handleOperatorInput);
-    }
+   
 }
 
 function addEventListenersToOperands(operandContainer)
@@ -97,25 +85,49 @@ function addEventListenersToOperands(operandContainer)
 
 function handleOperatorInput(event)
 {
+
     console.log("handleOperatorInput")
     console.log("Operator clicked");
     console.log(event);
     console.log(event.path[0].innerHTML);
-    if(!operatorIsChosen())
+
+    
+    if(event.path[0].innerHTML=="AC")
     {
-        input.operator=event.path[0].innerHTML;
-        calculatorDisplay.innerHTML="";
+        clearScreen();
+
+    }
+    else if(event.path[0].innerHTML=="=>")
+    {
+        let string =calculatorDisplay.innerHTML;
+        calculatorDisplay = string.substring(0,string.length-1);
         
+    }
+    else if(!operatorIsChosen())
+    {
+        // Store the currently chosen operator
+        input.operator=event.path[0].innerHTML;
+
+        // clear the display
+        calculatorDisplay.innerHTML="";
+         
     }
     else if(operatorIsChosen())
     {
+        // If an operator was chosen
+
+        // Perform an operation 
         performOperation(input.operator);
-        
-        calculatorDisplay.innerHTML=input.operand1;
-        input.operand2="";
+
+        // Store the recently added operator
+        input.operator= event.path[0].innerHTML;
+
+        // Erase the old operand
+       
         
         
     }
+    
 }
     
 
@@ -134,6 +146,7 @@ function handleOperandInput(event)
         input.operand2+=event.path[0].innerHTML;
         calculatorDisplay.innerHTML=input.operand2;
         console.log(input.operand2);
+        
            
     }
     else if(!operatorIsChosen())
@@ -143,7 +156,7 @@ function handleOperandInput(event)
        calculatorDisplay.innerHTML=input.operand1;
        console.log(input.operand1);
     }
-  
+
 }
 
 function clearScreen()
@@ -172,40 +185,37 @@ function operatorIsChosen()
 
 function performOperation(operator)
 {
+    // Convert the operands to ints
     let operand1=parseInt(input.operand1);
     console.log(operand1);
     let operand2= parseInt(input.operand2);
     console.log(operand2);
+
+    // Find which operator was chosen and perform an operation
     if(operator==="+")
     {
         input.operand1= add(operand1,operand2);
+        
+
     }
     else if(operator==="-")
     {
         input.operand1= subtract(operand1,operand2);
+        
     }
-    else if(operator==="/")
+    else if(operator==="÷")
     {
         input.operand1= divide(operand1,operand2);
+        
     } 
     else if(operator==="x")
     {
-        input.operand1= multiply(operand1,operand2);input.operand2="";
+        input.operand1= multiply(operand1,operand2);input.operand2="";        
     }
-    else if(operator=="AC")
-    {
-        clearScreen();
-    }
-    else if(operator="xʸ")
-    {
-        input.operand1 = power(operand1,operand2);
-    } 
-    
+    console.log(`Result `+input.operand1);
+    calculatorDisplay.innerHTML=input.operand1;
+    input.operand2="";  
 
-    
- 
-    
-    
 
 }
 
